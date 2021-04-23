@@ -1,0 +1,15 @@
+controller:
+  name: controller
+  image:
+    repository: k8s.gcr.io/ingress-nginx/controller
+  containerPort:
+    http: 80
+    https: 443
+  dnsPolicy: ClusterFirstWithHostNet
+  hostNetwork: true
+  kind: DaemonSet 
+  service:
+    enabled: true
+    type: ClusterIP
+defaultBackend:
+  enabled: true
