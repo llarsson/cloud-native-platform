@@ -4,6 +4,10 @@ set -eou pipefail
 
 pushd kubespray
 
+if [ -x .venv ]; then
+				rm -rf .venv
+fi
+
 python3 -m venv .venv
 
 . .venv/bin/activate
