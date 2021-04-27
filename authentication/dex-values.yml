@@ -1,0 +1,58 @@
+imageTag: "v2.26.0"
+#crds are installed in the k8s apply step
+crd:
+  present: true
+ingress:
+  enabled: true
+  annotations:
+   cert-manager.io/issuer: letsencrypt-prod
+
+  tls:
+  - secretName: dex-tls
+    hosts:
+    - dex.DOMAIN_PLACEHOLDER
+  hosts:
+  - host: dex.DOMAIN_PLACEHOLDER
+    paths:
+    - path: /
+      pathType: Prefix
+
+# https termination by ingress instead of through dex
+https:
+  enabled: false
+volumeMounts:
+- mountPath: /etc/dex/google
+  name: google-sa
+volumes:
+- name: google-sa
+  secret:
+    secretName: google-sa
+config:
+  issuer: https://dex.DOMAIN_PLACEHOLDER
+  storage:
+    type: kubernetes
+    config:
+      inCluster: true
+  connectors:
+  - type: google
+    id: google
+    name: Google
+    config:
+      # Connector config values starting with a "$" will read from the environment.
+      clientID: CLIENT_ID_PLACEHOLDER
+      clientSecret: CLIENT_SECRET_PLACEHOLDER
+      # Dex's issuer URL + "/callback"
+      redirectURI: https://dex.DOMAIN_PLACEHOLDER/callback
+      serviceAccountFilePath: /etc/dex/google/sa.json
+      adminEmail: ADMIN_EMAIL_PLACEHOLDER
+      hostedDomains:
+        - elastisys.com
+      groups:
+        - cnosa@elastisys.com
+  staticClients:
+    - id: kubelogin
+      name: 'Kubernetes CLI'
+      secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+      redirectURIs:
+      - http://localhost:8000
+      - http://localhost:8080/oauth2/callback
