@@ -28,3 +28,21 @@ sed -i -e "s!# kube_oidc_client_id: .*!kube_oidc_client_id: kubelogin!g" kubespr
 sed -i -e "s!# kube_oidc_username_claim: .*!kube_oidc_username_claim: email!g" kubespray/inventory/${CLUSTER}/group_vars/k8s-cluster/k8s-cluster.yml
 sed -i -e "s!# kube_oidc_groups_claim: .*!kube_oidc_groups_claim: groups!g" kubespray/inventory/${CLUSTER}/group_vars/k8s-cluster/k8s-cluster.yml
 ./run_ansible.sh
+
+cat >> $KUBECONFIG <<HERE
+- name: oidc
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      command: kubectl
+      args:
+      - oidc-login
+      - get-token
+      - --oidc-issuer-url=https://dex.${CLUSTER}.${TOP_LEVEL_DOMAIN}
+      - --oidc-client-id=kubelogin
+      - --oidc-client-secret=ZXhhbXBsZS1hcHAtc2VjcmV0
+      - --oidc-extra-scope=email
+      - --oidc-extra-scope=groups
+HERE
+kubectl config set-context --current --user=oidc
+echo "Your kubectl is now set up to use OpenID Connect login"
