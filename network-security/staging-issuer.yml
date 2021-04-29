@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-staging
+  namespace: default
+spec:
+  acme:
+    email: EMAIL_PLACEHOLDER
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    solvers:
+    # An empty selector will 'match' all Certificate resources that
+    # reference this Issuer.
+    - selector: {}
+      http01:
+        ingress:
+          class: nginx
