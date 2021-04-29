@@ -1,3 +1,6 @@
 [submodule "cluster/kubespray"]
 	path = cluster/kubespray
 	url = git@github.com:kubernetes-sigs/kubespray.git
+[submodule "database/postgres-operator"]
+	path = database/postgres-operator
+	url = git@github.com:zalando/postgres-operator.git
