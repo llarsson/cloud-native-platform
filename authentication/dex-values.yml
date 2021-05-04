@@ -56,3 +56,4 @@ config:
       redirectURIs:
       - http://localhost:8000
       - http://localhost:8080/oauth2/callback
+      - https://grafana.DOMAIN_PLACEHOLDER/login/generic_oauth
