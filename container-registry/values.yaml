@@ -1,0 +1,13 @@
+externalURL: https://harbor.DOMAIN_PLACEHOLDER
+expose:
+  tls:
+    certSource: secret
+    secret:
+      secretName: harbor-tls
+      notarySecretName: notary-tls
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      core: harbor.DOMAIN_PLACEHOLDER
+      notary: notary.DOMAIN_PLACEHOLDER
