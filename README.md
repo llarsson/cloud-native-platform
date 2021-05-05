@@ -48,13 +48,13 @@ Optionally, if you don't want your cluster to be called `xxx-demo-cluster`, wher
 Now, you can set up your cluster. Do that via:
 
  1. `cd cluster/`
- 1. `./setup.sh` to render the initial configuration files.
+ 1. `./setup.sh` to render the initial configuration files to deploy the cluster.
  1. `./install_ansible.sh` to install Ansible and its dependencies in a virtualenv, so don't worry, it won't explode Python dependencies all over your system.
- 1. `./apply.sh`
- 1. `./run_ansible.sh`
- 1. `./install_nginx_ingress_controller.sh`
- 1. `./configure_dns.sh`
- 1. `source export_kubeconfig.sh`
+ 1. `./apply.sh` to run Terraform and get your cluster's VMs up and running. This step costs money.
+ 1. `./run_ansible.sh` to install Kubernetes.
+ 1. `./install_nginx_ingress_controller.sh` to install the NGINX Ingress Controller, so we can get traffic into the cluster.
+ 1. `./configure_dns.sh` to set up a DNS wildcard record for `*.${CLUSTER}.${TOP_LEVEL_DOMAIN}`, so that any service we expose under that wildcard will be accessible via the NGINX Ingress Controller.
+ 1. `source export_kubeconfig.sh` to make your `kubectl` know where the cluster is.
 
 If you at this point issue a `kubectl get nodes` command, you should see your cluster present itself. Success!
 
