@@ -19,9 +19,13 @@ But the goal is that we get a cluster that supports:
 
 ## Prerequisites
 
-You will need a good local stack with bash, kubectl (with krew and kube-login installed), terraform, and Python 3 on your laptop. And a web browser, of course.
+You will need a good local stack with bash, kubectl (with `krew` to manage plugins and the `oidc-login` plugin installed), terraform, the `exo` command line tool for working with Exoscale, and Python 3 on your laptop. And a web browser, of course.
+
+Get yourself an Exoscale account, and set up API access. You should also make your Exoscale API access credentials available in the `~/.cloudstack.ini` file if you want the Terraform provider to Just Work.
 
 You will also need a Google account and administrative permissions so you can give privileges to a service account for single-sign on (SSO) purposes. Follow the guide [here](https://elastisys.com/elastisys-engineering-how-to-use-dex-with-google-accounts-to-manage-access-in-kubernetes/).
+
+Finally, do note that this repo has git submodules, so go fetch them as part of cloning this repo. You can easily add `--recurse-submodules` as part of your `git clone` command. Or just go `git submodule update --init --recursive` to fetch them after the fact.
 
 ## Usage
 
@@ -44,8 +48,8 @@ Optionally, if you don't want your cluster to be called `xxx-demo-cluster`, wher
 Now, you can set up your cluster. Do that via:
 
  1. `cd cluster/`
- 1. `./setup.sh`
- 1. `./install_ansible.sh`
+ 1. `./setup.sh` to render the initial configuration files.
+ 1. `./install_ansible.sh` to install Ansible and its dependencies in a virtualenv, so don't worry, it won't explode Python dependencies all over your system.
  1. `./apply.sh`
  1. `./run_ansible.sh`
  1. `./install_nginx_ingress_controller.sh`
@@ -111,4 +115,4 @@ You can go to `argo.${CLUSTER}.${TOP_LEVEL_DOMAIN}` to interact with it.
 
 # Questions?
 
-Don't hesitate to send questions either via GitHub Issues in this repo or to me directly at [lars.larsson@elastisys.com](mailto:lars.larsson@elastisys.com)! 
+Don't hesitate to send questions either via GitHub Issues in this repo or to me directly at [lars.larsson@elastisys.com](mailto:lars.larsson@elastisys.com)!
