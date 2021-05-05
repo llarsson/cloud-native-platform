@@ -58,3 +58,4 @@ config:
       - http://localhost:8080/oauth2/callback
       - https://grafana.DOMAIN_PLACEHOLDER/login/generic_oauth
       - https://harbor.DOMAIN_PLACEHOLDER/c/oidc/callback
+      - https://argo.DOMAIN_PLACEHOLDER/auth/callback
