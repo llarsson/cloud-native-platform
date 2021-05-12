@@ -40,6 +40,7 @@ First, `export` some environment variables:
  - `DEX_CLIENT_ID`, the client ID that your Google SSO account integration gives you (see guide above).
  - `DEX_CLIENT_SECRET`, the secret associated to the Google SSO client ID.
  - `SA_FILE`, the service account JSON file that you downloaded from Google as part of following the SSO guide above.
+ - `OIDC_CLIENT_SECRET`, a string value that your applications will use as a client secret value for OpenID Connect integrations with your Dex.
 
 Optionally, if you don't want your cluster to be called `xxx-demo-cluster`, where `xxx` is your local username (determined via `whoami`), you can export `CLUSTER` to be whatever you want it to be called. Regular DNS name rules apply, so no spaces or similar.
 

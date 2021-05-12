@@ -17,7 +17,7 @@ grafana:
       name: Dex
       enabled: true
       client_id: kubelogin
-      client_secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+      client_secret: OIDC_CLIENT_SECRET_PLACEHOLDER
       scopes: openid email groups
       api_url: https://dex.DOMAIN_PLACEHOLDER/userinfo
       auth_url: https://dex.DOMAIN_PLACEHOLDER/auth

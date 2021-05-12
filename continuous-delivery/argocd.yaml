@@ -2335,7 +2335,7 @@ data:
     name: Dex
     issuer: https://dex.DOMAIN_PLACEHOLDER
     clientID: kubelogin
-    clientSecret: ZXhhbXBsZS1hcHAtc2VjcmV0
+    clientSecret: OIDC_CLIENT_SECRET_PLACEHOLDER
     requestedScopes: ["openid", "email", "groups"]
     requestedIDTokenClaims: {"groups": {"essential": true}}
 ---

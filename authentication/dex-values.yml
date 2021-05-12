@@ -52,7 +52,7 @@ config:
   staticClients:
     - id: kubelogin
       name: 'Kubernetes CLI'
-      secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+      secret: OIDC_CLIENT_SECRET_PLACEHOLDER
       redirectURIs:
       - http://localhost:8000
       - http://localhost:8080/oauth2/callback

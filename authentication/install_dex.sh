@@ -4,6 +4,7 @@ set -eou pipefail
 CLUSTER=${CLUSTER:-$(whoami)-demo-cluster}
 
 cp dex-values.yml rendered-dex-values.yml
+sed -i -e "s/OIDC_CLIENT_SECRET_PLACEHOLDER/${OIDC_CLIENT_SECRET}/g" rendered-dex-values.yml
 sed -i -e "s/CLIENT_ID_PLACEHOLDER/${DEX_CLIENT_ID}/g" rendered-dex-values.yml
 sed -i -e "s/CLIENT_SECRET_PLACEHOLDER/${DEX_CLIENT_SECRET}/g" rendered-dex-values.yml
 sed -i -e "s/DOMAIN_PLACEHOLDER/${CLUSTER}.${TOP_LEVEL_DOMAIN}/g" rendered-dex-values.yml
@@ -40,7 +41,7 @@ cat >> $KUBECONFIG <<HERE
       - get-token
       - --oidc-issuer-url=https://dex.${CLUSTER}.${TOP_LEVEL_DOMAIN}
       - --oidc-client-id=kubelogin
-      - --oidc-client-secret=ZXhhbXBsZS1hcHAtc2VjcmV0
+      - --oidc-client-secret=${OIDC_CLIENT_SECRET}
       - --oidc-extra-scope=email
       - --oidc-extra-scope=groups
 HERE
